@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Vue 2</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <p v-for="product in products" :key="product.id"> "{{ product.title }}". Price is {{
+            product.price }}
+        </p>
+
+        <button v-if="state" @click="prodSort(state)">Сортировать по возрастанию</button>
+        <button v-else @click="prodSort(state)">Сортировать по убыванию</button>
+
+    </div>
+
+    <script>
+
+        new Vue({
+
+            el: '#app',
+            data: {
+                state: true,
+                products: [{ title: "apple", price: 50 }, { title: "orange", price: 150 }, { title: "pineapple", price: 80 }, { title: "banana", price: 60 }, { title: "grapefruit", price: 120 }, { title: "tomato", price: 90 }]
+            },
+
+            methods: {
+                prodSort(state) {
+                    if (this.state) {
+                        this.products.sort((x, y) => x.price - y.price);
+                    }
+                    else { this.products.sort((x, y) => y.price - x.price); }
+                    this.state = !state;
+                }
+            },
+        })
+
+    </script>
+
+</body>
+
+</html>
